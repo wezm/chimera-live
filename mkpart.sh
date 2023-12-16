@@ -11,6 +11,8 @@
 # License: BSD-2-Clause
 #
 
+set -x
+
 readonly PROGNAME=$(basename "$0")
 
 do_cleanup() {

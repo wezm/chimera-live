@@ -11,6 +11,8 @@
 # License: BSD-2-Clause
 #
 
+set -x
+
 umask 022
 
 readonly PROGNAME=$(basename "$0")
