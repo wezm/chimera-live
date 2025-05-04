@@ -114,6 +114,7 @@ case "$MKLIVE_BOOTLOADER" in
             ppc*) TARGET_PACKAGES="$TARGET_PACKAGES grub-powerpc-ieee1275" ;;
             riscv64) TARGET_PACKAGES="$TARGET_PACKAGES grub-riscv64-efi" ;;
             loongarch64) TARGET_PACKAGES="$TARGET_PACKAGES grub-loongarch64-efi" ;;
+            x86) TARGET_PACKAGES="$TARGET_PACKAGES grub-i386-efi grub-i386-pc" ;;
             x86_64) TARGET_PACKAGES="$TARGET_PACKAGES grub-i386-efi grub-i386-pc grub-x86_64-efi" ;;
             *) die "unknown GRUB target for $APK_ARCH" ;;
         esac
@@ -438,6 +439,9 @@ case "$MKLIVE_BOOTLOADER" in
         # efi executables for usb/disk boot
         mkdir -p "${IMAGE_DIR}/EFI/BOOT"
         case "$APK_ARCH" in
+            x86)
+                cp "${HOST_DIR}/usr/share/limine/BOOTIA32.EFI" "${IMAGE_DIR}/EFI/BOOT"
+                ;;
             x86_64)
                 cp "${HOST_DIR}/usr/share/limine/BOOTIA32.EFI" "${IMAGE_DIR}/EFI/BOOT"
                 cp "${HOST_DIR}/usr/share/limine/BOOTX64.EFI" "${IMAGE_DIR}/EFI/BOOT"
@@ -459,7 +463,7 @@ case "$MKLIVE_BOOTLOADER" in
         prepare_efi_img
         # now generate
         case "$APK_ARCH" in
-            x86_64)
+            x86|x86_64)
                 # but first, necessary extra files for bios
                 cp "${HOST_DIR}/usr/share/limine/limine-bios-cd.bin" "${IMAGE_DIR}"
                 cp "${HOST_DIR}/usr/share/limine/limine-bios.sys" "${IMAGE_DIR}"
