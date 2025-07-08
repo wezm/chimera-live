@@ -26,7 +26,8 @@ BASE_PKG="base-full"
 PLAT_PKG=
 KERNEL_PKG=
 
-PLATFORMS="bootstrap full rpi pbp quartzpro64 rock64 rockpro64 unmatched"
+PLATFORMS="bootstrap full rpi pbp quartzpro64 rock4cplus rock64 rockpro64 \
+unmatched"
 
 for pkg in ${PLATFORMS}; do
     if [ "$pkg" = "$PLATFORM" ]; then
@@ -45,6 +46,6 @@ done
 echo "unknown PLATFORM type: $PLATFORM"
 echo
 echo "supported platform types: full bootstrap"
-echo "                          rpi pbp quartzpro64 rock64 rockpro64"
-echo "                          unmatched"
+echo "                          rpi pbp quartzpro64 rock4cplus rock64"
+echo "                          rockpro64 unmatched"
 exit 1
